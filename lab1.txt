@@ -1,0 +1,60 @@
+P1
+
+Function FindGreatestNumber(): int {
+    int number1 = readInt();
+    int number2 = readInt();
+    int number3 = readInt();
+
+    if (number1 >= number2 and number1 >= number3) {
+        console.log(number1);
+        return number1;
+    }
+    else if (number2 >= number1 and number2 >= number3) {
+        console.log(number2);
+        return number2;
+    }
+    else {
+        console.log(number3);
+        return number3;
+    }
+}
+
+P2
+
+Function WeightedAverage(int number1, int number2, int number3, int weight1, int weight2, int weight3): real {
+    real | int weightedAverage = (weight1 * number1 + weight2 * number2 + weight3 * number3) / (weight1 + weight2 + weight3);
+    console.log(weightedAverage)
+    return weightedAverage;
+}
+
+P3
+
+Function SumOfNNumbers(int[] | real[] numbers): int | real {
+    int | real sum = 0;
+    for (var number in numbers) {
+        sum += number;
+    }
+    console.log(sum);
+    return sum;
+}
+
+P1ERR
+
+Function FindGreatestNumber(): int {
+    int 1number = readInt(); //lexical error
+    int `number = readInt(); //lexical error
+    int 3nümber = readInt(); //lexical error
+
+    if (number1 >=< number2 and number1 >=< number3) {
+        console.log(number1);
+        return number1;
+    }
+    else if (number2 >=< number1 and number2 >=< number3) {
+        console.log(number2);
+        return number2;
+    }
+    else {
+        console.log(number3);
+        return number3;
+    }
+}
