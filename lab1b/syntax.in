@@ -1,0 +1,22 @@
+program = "var" decllist ";" cmpdstmt ";"
+decllist = declaration ";"
+declaration = type IDENTIFIER ";" | type assignstmt ";"
+type1 = "boolean" | "char" | "int" | "struct" | "real" | ...
+arraydecl = type1 IDENTIFIER "[" "]" ";"
+type = type1 | arraydecl
+cmpdstmt = "{" {stmtlist} "}"
+stmtlist = stmt ";" | stmt ";" stmtlist
+stmt = simplestmt | structstmt
+simplestmt = assignstmt | iostmt
+assignstmt = IDENTIFIER "=" expression ";"
+expression = expression "+" term ";" | expression "-" term ";" | term ";"
+term = term "*" factor | term "/" factor | factor
+factor = "(" expression ")" | literal ";"
+literal = constant | IDENTIFIER
+iostmt = "readInt" "(" ")" ";" | "read" "(" ")" | "console" "." "log" "(" (IDENTIFIER | expression) ")" ";"
+structstmt = (cmpdstmt | ifstmt | whilestmt) ";"
+ifstmt = "if" "(" condition ")" "{" stmt "}" { "else" [ifstmt] "{" stmt "}" }
+whilestmt = "while" condition "{" stmt "}"
+forstmt = "for" "(" stmt ")" "{" stmt "}"
+condition = expression RELATION expression
+RELATION = "<" | "<=" | "===" | ">=" | ">" | "!=="
