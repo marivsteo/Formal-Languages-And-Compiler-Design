@@ -19,14 +19,14 @@ class HashTable:
         return value in self.__values[self.hash(value)]
 
     def get_position(self, value):
-        """returns pos in list and deque or adds the value to the hashtable if not present"""
+        """returns the position in the list and in the deque or adds the value to the hashtable if not present"""
         found_value = self.search(value)
         if found_value is False:
             self.add(value)
         position_list = self.hash(value)
         position_deque = 0
-        for k in self.__values[position_list]:
-            if k == value:
+        for v in self.__values[position_list]:
+            if v == value:
                 return position_list, position_deque
             else:
                 position_deque += 1
