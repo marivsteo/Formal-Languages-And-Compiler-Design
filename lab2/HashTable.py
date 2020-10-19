@@ -19,7 +19,7 @@ class HashTable:
         return value in self.__values[self.hash(value)]
 
     def get_position(self, value):
-        """returns pos in list and deque or (-1,-1) if not present"""
+        """returns pos in list and deque or adds the value to the hashtable if not present"""
         found_value = self.search(value)
         if found_value is False:
             self.add(value)
