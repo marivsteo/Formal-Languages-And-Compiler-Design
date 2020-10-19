@@ -18,7 +18,7 @@ class HashTable:
     def search(self, value):
         return value in self.__values[self.hash(value)]
 
-    def get_position(self, value):
+    def position(self, value):
         """returns the position in the list and in the deque or adds the value to the hashtable if not present"""
         found_value = self.search(value)
         if found_value is False:

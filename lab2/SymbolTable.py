@@ -11,8 +11,8 @@ class SymbolTable:
     def search(self, value):
         return self.__hash_table.search(value)
 
-    def get_position(self, value):
-        return self.__hash_table.get_position(value)
+    def position(self, value):
+        return self.__hash_table.position(value)
 
     def __str__(self) -> str:
         return str(self.__hash_table)
