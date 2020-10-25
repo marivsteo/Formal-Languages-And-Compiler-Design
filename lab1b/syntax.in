@@ -19,4 +19,4 @@ ifstmt = "if" "(" condition ")" "{" stmt "}" { "else" [ifstmt] "{" stmt "}" }
 whilestmt = "while" condition "{" stmt "}"
 forstmt = "for" "(" stmt ")" "{" stmt "}"
 condition = expression RELATION expression
-RELATION = "<" | "<=" | "===" | ">=" | ">" | "!==" 
+RELATION = "<" | "<=" | "===" | ">=" | ">" | "!=="
