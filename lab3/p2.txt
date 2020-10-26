@@ -1,0 +1,4 @@
+int weight1, weight2, weight3, number1, number2, number3;
+    real | int weightedAverage = (weight1 * number1 + weight2 * number2 + weight3 * number3) / (weight1 + weight2 + weight3);
+    console.log(weightedAverage);
+    return weightedAverage;

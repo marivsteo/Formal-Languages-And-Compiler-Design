@@ -1,0 +1,7 @@
+int[] numbers = [1, 2, 2, 3];
+    int | real sum = 0;
+    for (var number in numbers) {
+        sum += number;
+    }
+    console.log(sum);
+    return sum;

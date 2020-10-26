@@ -1,0 +1,16 @@
+int 1number = readInt(); //lexical error
+    int `number = readInt(); //lexical error
+    int 3nümber = readInt(); //lexical error
+
+    if (number1 >=< number2 and number1 >=< number3) {
+        console.log(number1);
+        return number1;
+    }
+    else if (number2 >=< number1 and number2 >=< number3) {
+        console.log(number2);
+        return number2;
+    }
+    else {
+        console.log(number3);
+        return number3;
+    }
