@@ -12,5 +12,5 @@ int Number1 = readInt();
     }
     else {
         console.log(number3);
-        return number3;
+        return number1;
     }
