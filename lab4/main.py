@@ -1,42 +1,60 @@
-from PIF import PIF
-from Scanner import Scanner
-from SymbolTable import SymbolTable
-from Scanner import read_file, reserved_words, separators, operators
+from fa import FiniteAutomata
 
 
-def main():
-    read_file()
-    file_name = "p1.txt"
-    symbol_table = SymbolTable(15)
-    pif = PIF()
-    scanner = Scanner()
-    exception_message = ""
+class Console:
 
-    with open(file_name, 'r') as file:
-        line_counter = 0
-        for line in file:
-            line_counter += 1
-            for token in scanner.tokenize(line.strip()):
-                if token in reserved_words+separators+operators:
-                    if token == ' ':
-                        continue
-                    pif.add(token, (0, 0))
-                elif scanner.is_identifier(token) or scanner.is_constant(token):
-                    identifier = symbol_table.position(token)
-                    pif.add(token, identifier)
-                else:
-                    exception_message += 'Lexical error at token ' + token + ', at line ' + str(line_counter) + "\n"
+    def __read_fa(self):
+        self.fa = FiniteAutomata.read_file('fa.in')
 
-    with open('st.out', 'w') as writer:
-        writer.write(str(symbol_table))
+    def __print_all(self):
+        print(self.fa)
 
-    with open('pif.out', 'w') as writer:
-        writer.write(str(pif))
+    def __print_states(self):
+        print(self.fa.states)
 
-    if exception_message == '':
-        print("Lexically correct")
-    else:
-        print(exception_message)
+    def __print_alphabet(self):
+        print(self.fa.alphabet)
+
+    def __print_q0(self):
+        print(self.fa.q0)
+
+    def __print_final_states(self):
+        print(self.fa.final_states)
+
+    def __print_transitions(self):
+        print(self.fa.transitions)
+
+    def __print_dfa_check(self):
+        print("Yes, it is a DFA") if self.fa.dfa_check() else print("No, it's not a DFA")
+
+    def run(self):
+        self.__read_fa()
+        commands = {'1': self.__print_all,
+                    '2': self.__print_states,
+                    '3': self.__print_alphabet,
+                    '4': self.__print_q0,
+                    '5': self.__print_final_states,
+                    '6': self.__print_transitions,
+                    '7': self.__print_dfa_check}
+        ok = False
+        while not ok:
+            print("0. Exit")
+            print("1. Display the finite automata")
+            print("2. Display all states")
+            print("3. Display the alphabet")
+            print("4. Display the initial state/q0")
+            print("5. Display the final states")
+            print("6. Display all transitions")
+            print("7. Check if FA is DFA")
+            print(">>")
+            cmd = input()
+            if cmd in commands.keys():
+                commands[cmd]()
+            elif cmd == "0":
+                ok = True
+            else:
+                continue
 
 
-main()
+ui = Console()
+ui.run()

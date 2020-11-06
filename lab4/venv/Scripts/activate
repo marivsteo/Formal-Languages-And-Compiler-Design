@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Marius\Desktop\university5\FLCD\Lab\Formal-Languages-And-Compiler-Design\lab3\venv"
+VIRTUAL_ENV="C:\Users\Marius\Desktop\university5\FLCD\Lab\Formal-Languages-And-Compiler-Design\lab5\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
