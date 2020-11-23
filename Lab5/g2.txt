@@ -1,0 +1,39 @@
+program ::= [decllist ";"] stmtlist ";"
+
+decllist ::= declaration | declaration ";" decllist | arraydecl
+
+declaration ::= type1 IDENTIFIER ";" | type1 IDENTIFIER "=" expression
+
+type1 ::= "STRING" | "NUMBER"
+
+arraydecl ::= "ARRAY" type1 "[" nr "]" IDENTIFIER ";"
+
+type  ::= type1 | arraydecl
+
+stmtlist ::= stmt | stmt ";" stmtlist
+
+stmt ::= simplstmt | structstmt | declaration
+
+simplstmt ::= assignstmt | iostmt
+
+assignstmt ::= IDENTIFIER "=" expression
+
+expression ::= expression "+" term | term | expression "-" term
+
+term ::= term "*" factor | factor | term "/" factor
+
+factor ::= "(" expression ")" | IDENTIFIER | IDENTIFIER "[" expression "]"
+
+iostmt ::= "READ" IDENTIFIER | "PRINT" IDENTIFIER
+
+structstmt ::= ifstmt | whilestmt | forstmt
+
+ifstmt ::= "IF" condition ":" stmtlist ";" {["ELSIF" condition ":" stmt ";"]} ["ELSE" stmt ";"] "FI" ";"
+
+whilestmt ::= "WHILE" condition ":" stmtlist "ELIHW"
+
+forstmt ::= "FOR" IDENTIFIER "IN" "(" expression "," expression ")" ":" stmtlist ";" "ROF" ";"
+
+condition ::= expression RELATION expression {[and condition]} {[or condition]}
+
+RELATION ::= "<" | "<=" | "==" | "<>" | ">=" | ">" | "!="
