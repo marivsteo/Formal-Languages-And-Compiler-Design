@@ -1,53 +1,37 @@
 class Grammar:
+    def __init__(self, fileName):
+        self.Terminals: [str] = []
+        self.Nonterminals: [str] = []
+        self.Productions: dict = {}
+        self.fileName = fileName
+        self.read_from_file(self.fileName)
 
-    def __init__(self, Nonterminals, Terminals, Productions, S):
-        self.Nonterminals = Nonterminals
-        self.Terminals = Terminals
-        self.Productions = Productions
-        self.S = S
+    def read_from_file(self, __path_to_file):
+        with open(self.fileName, 'r') as fh:
+            text_lines = fh.readlines()
 
-    @staticmethod
-    def parseLine(line):
-        return [value.strip() for value in line.strip().split('=')[1].strip()[1:-1].strip().split(',')]
+        self.Nonterminals = [elem for elem in text_lines[0].strip().split(',')]
+        self.Terminals = [elem for elem in text_lines[1].strip().split(',')]
 
-    @staticmethod
-    def fromFile(fileName):
-        with open(fileName) as file:
-            Nonterminals = Grammar.parseLine(file.readline())
-            Terminals = Grammar.parseLine(file.readline())
-            S = file.readline().split('=')[1].strip()
-            Productions = Grammar.parseRules(Grammar.parseLine(''.join([line for line in file])))
+        for line in text_lines[2:]:
+            split = line.strip().split("->")
+            non_terminal = split[0]
+            right_side = [elem.strip() for elem in split[1].split('|')]
 
-            return Grammar(Nonterminals, Terminals, Productions, S)
+            list = self.Productions.get(non_terminal, [])
+            for elem in right_side:
+                list.append(elem)
 
-    @staticmethod
-    def parseRules(rules):
-        result = []
+            self.Productions[non_terminal] = list
 
-        for rule in rules:
-            lhs, rhs = rule.split('->')
-            lhs = lhs.strip()
-            rhs = [value.strip() for value in rhs.split('|')]
+    def get_terminals(self):
+        return self.Terminals
 
-            for value in rhs:
-                result.append((lhs, value))
+    def get_non_terminals(self):
+        return self.Nonterminals
 
-        return result
+    def get_productions(self):
+        return self.Productions
 
-    def isNonTerminal(self, value):
-        return value in self.Nonterminals
-
-    def isTerminal(self, value):
-        return value in self.Terminals
-
-    def getProductionsFor(self, nonTerminal):
-        if not self.isNonTerminal(nonTerminal):
-            raise Exception('Can only show productions for non-terminals')
-
-        return [prod for prod in self.Productions if prod[0] == nonTerminal]
-
-    def __str__(self):
-        return 'Nonterminals = { ' + ', '.join(self.Nonterminals) + ' }\n' \
-               + 'Terminals = { ' + ', '.join(self.Terminals) + ' }\n' \
-               + 'Productions = { ' + ', '.join([' -> '.join(prod) for prod in self.Productions]) + ' }\n' \
-               + 'S = ' + str(self.S) + '\n'
+    def get_production_for_non_terminal(self, non_terminal):
+        return self.Productions.get(non_terminal, [])

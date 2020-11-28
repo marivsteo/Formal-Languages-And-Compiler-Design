@@ -1,7 +1,5 @@
-N = { S, A }
-T = { a, b }
-S = S
-P = {
-	S -> aA | E,
-	A -> a
-}
+S,A
+a,b,c
+S->aA
+A->bA
+A->c
